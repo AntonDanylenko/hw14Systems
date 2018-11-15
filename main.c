@@ -4,20 +4,25 @@
 #include <string.h>
 
 char ** parse_args(char * line){
-  char ** array = malloc(5*sizeof(char *));
-  char * s = strsep(&line, " ");
-  int index = 0;
-  while(s){
-    array[index] = s;
-    printf("s: %s\n", s);
-    s = strsep(&line, " ");
+  char ** arr = malloc(6 * sizeof(char *));
+  int i;
+  for (i = 0; i < 6; i++) {
+    arr[i] = strsep(&line, " ");
   }
-  return array;
+  return arr;
 }
 
 int main(int argc, char *argv[]) {
-  char string[100] = "whoa this is cool";
-  char * line = string;
-  parse_args(line);
+  // char string[100] = "whoa this is cool";
+  // char * line = string;
+  // parse_args(line);
+  if (argc > 1) {
+    char ** args = parse_args(argv[1]);
+    printf("args[0]: %s\n", args[0]);
+    execvp(args[0],args);
+  }
+  else {
+    printf("Need more arguments.\n" );
+  }
   return 0;
 }
